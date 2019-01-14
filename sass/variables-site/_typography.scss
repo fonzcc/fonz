@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'MaisonNeueMono';
+  src: url('fonts/maisonneuemono.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MaisonNeueMedium';
+  src: url('fonts/maisonneuemedium.ttf') format('truetype');
+}
+
+$font__nav: 'MaisonNeueMono';
+$font__main: 'MaisonNeueMono';
+$font__email-link: 'MaisonNeueMedium';
+$font__preview-title: 'MaisonNeueMedium';
+
+
+
+
+
+
+
+
+$font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+$font__pre: "Courier 10 Pitch", Courier, monospace;
+$font__line-height-body: 1.5;
+$font__line-height-pre: 1.6;

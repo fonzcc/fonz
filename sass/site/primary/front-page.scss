@@ -1,0 +1,344 @@
+
+.collage-logo {
+    display: none;
+
+    @media screen and (max-width: 991px) {
+        display: block;
+        margin-top: -70px;
+    }
+
+    @media screen and (max-width: 768px) {
+        margin-top: -50px;
+    }
+
+    @media screen and (max-width: 520px) {
+        margin-top: -30px;
+    }
+}
+
+.project-collage-container {
+    margin-top: 225px;
+    position: relative;
+
+    .collage-logo {
+        display: none;
+    }
+
+    .project-collage {
+       margin-bottom: 250px;
+       cursor: pointer;
+    
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-count-hidden {
+            display: none;
+        }
+
+        .title-hidden {
+            display: none;
+        }
+
+        .description-hidden {
+            display: none;
+        }
+
+        .transition-image-hidden {
+            display: none;
+        }
+
+        .type-hidden {
+            display: none;
+        }
+
+        @media screen and (max-width: 991px) {
+            margin-bottom: 500px;
+        }
+    }
+}
+
+.project-info-container {
+    background-color: $color__project-background-body;
+    cursor: pointer;
+    z-index: 50;
+    height: 140px;
+    width: 100%;
+    position: fixed;
+    transform: translate3d(0, 0, 0);
+    bottom: 0;
+    padding-top: 20px;
+
+    .project-info {
+        padding-bottom: 100px;
+        position: relative;
+    }
+
+    .project-content {
+        margin-top: 30px;
+        // display: none;
+    }
+
+    .title {
+        font-family: $font__preview-title;
+        @include font-size(1.5);
+    }
+
+    .post-count {
+        @include font-size(0.75);
+    }
+
+    .meta-container {
+        opacity: 1;
+        transition: opacity .5s;
+    }
+
+    .fadeOut {
+        opacity: 0;
+        transition: opacity .4s;
+    }
+
+    .type {
+        margin-top: 70px;
+        @include font-size(0.625);
+    }
+
+    .type-mobile {
+        @include font-size(0.625);
+        margin-top: 20px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 40px;
+    }
+
+    @media screen and (max-width: 991px) {
+        z-index: 70;
+        bottom: -140px;
+
+        .description {
+            margin-top: 50px;
+        }
+
+        .type {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .type-mobile {
+            margin-top: 10px;
+        }
+    }
+}
+
+// svg logo styles
+svg#svg_page_nav_logo {
+    .st0 {
+        transition: stroke .3s;
+    }
+
+    .st1 {
+        transition: stroke .3s;
+    }
+}
+
+// hover styles for page nav bar 
+.page-nav-hover {
+    color: $color__text-main;
+    transition: color .3s;
+
+    &:hover {
+        color: $color__page-nav-hover;
+        transition: color .3s;
+
+        svg#svg_page_nav_logo  {
+            .st0 {
+                stroke: $color__page-nav-hover;
+                transition: stroke .3s;
+            }
+            .st1 {
+                stroke: $color__page-nav-hover;
+                transition: stroke .3s;
+            }
+        }
+    }
+}
+
+.project-info-container.expanded {
+    .project-info {
+        @media screen and (max-width: 992px) {
+            padding-top: 70px;
+        }
+    }
+}
+
+.svg-logo-clickable {
+    cursor: pointer;
+    transition: stroke .3s;
+
+    &:hover {
+        svg#svg_page_nav_logo .st0 {
+            stroke: $color__page-nav-hover;
+            transition: stroke .3s;
+        }
+    
+        svg#svg_page_nav_logo .st1 {
+            stroke: $color__page-nav-hover;
+            transition: stroke .3s;
+        }
+    }
+}
+
+#project-nav {
+    padding-top: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: $color__project-background-body;
+    display: none;
+    z-index: 80;
+
+    .project-nav-button {
+        border: 1px solid $color__page-nav-links;
+        width: 100%;
+        height: 50px;
+        padding-top: 10px;
+        padding-left: 10px;
+        cursor: pointer;
+        transition: color .3s, border .3s;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .mobile-button #X-Icon,
+    .mobile-button #Left-Icon,
+    .mobile-button #Right-Icon {
+        stroke: $color__page-nav-links;
+        transition: .3s;
+    }
+
+    
+
+    .mobile-button {
+        display: none;
+    }
+
+    @media screen and (max-width: 991px) {
+        height: 100px;
+
+        .text {
+            display: none;
+        }
+
+        .mobile-button {
+            display: block;
+        }
+    }
+}
+
+#svg-page-nav-logo-container {
+    width: 366px !important;
+    position: absolute;
+    top: 0;
+    right: 15px;
+}
+
+#scroll-top {
+    border: 1px solid $color__page-nav-links;
+    cursor: pointer;
+    float: right;
+    width: 65px;
+    height: 50px;
+    transition: border .3s, color .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    div {
+        transition: background-color .3s;
+    }
+
+    div:first-child {
+        height: 1px;
+        width: 10px;
+        background-color: $color__page-nav-links;
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 17px;
+        left: 23px
+    }
+
+    div:nth-child(2) {
+        height: 20px;
+        width: 1px;
+        background-color: $color__page-nav-links; 
+        position: absolute;
+    }
+
+    div:last-child {
+        height: 1px;
+        width: 10px;
+        background-color: $color__page-nav-links;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 17px;
+        right: 23px;
+    }
+
+
+    &:hover {
+        border: 1px solid $color__page-nav-hover;
+        color: $color__page-nav-hover;
+        transition: border .3s, color .3s;
+
+        div {
+            background-color: $color__page-nav-hover;
+            transition: background-color .3s;
+        }
+    }
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes flash {
+    from,
+    50%,
+    to {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+@keyframes flash {
+    from,
+    50%,
+    to {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+.flash {
+    -webkit-animation-name: flash;
+    animation-name: flash;
+}
