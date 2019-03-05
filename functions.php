@@ -125,7 +125,8 @@ add_action("wp_ajax_nopriv_get_post_count", "get_post_count");
  * Enqueue scripts and styles.
  */
 function fonz_scripts() {
-	wp_enqueue_style( 'fonz-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'fonz-style', get_stylesheet_uri() . '?' . rand() );
+	wp_enqueue_style( 'sass-style', get_template_directory_uri() . '/sass/style.css' );
 
 	wp_enqueue_script( 'fonz-navigation', get_template_directory_uri() . '/js/navigation.js', array('jquery'), '0.1', true );
 

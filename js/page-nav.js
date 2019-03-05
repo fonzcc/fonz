@@ -194,6 +194,7 @@
         // Expand Single Project Page
         // ====================================================
         function expandProject() {
+
             $project_info_container.addClass('expanded');
             // disable click event
             $project_info_container.off('click');
@@ -208,15 +209,18 @@
             });
 
             $project_nav.css('overflow-y', 'scroll');
+            
+            $project_nav.fadeIn(1);
+            $project_content.fadeIn(1);
 
             $project_info_container.animate({
                 'transform': 'translateY(0vh)',
                 'height': '100vh'
             }, 400).promise().done(function () {
-                $project_nav.fadeIn(400);
-                $project_content.fadeIn(400);
+                //$project_nav.fadeIn(1);
+                
             });
-            
+
             $page_nav_logo.addClass('svg-logo-clickable');
             $project_info_container.removeClass('page-nav-hover');
         }
