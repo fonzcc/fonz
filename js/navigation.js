@@ -86,14 +86,6 @@
 		});
 
 
-
-
-
-
-
-
-
-
 		function workCall() {
 			//history.replaceState(null, null, "/work")
 			if($work_link.hasClass('active')) {
@@ -156,7 +148,9 @@
 				}); 
 			};
 		};
+		
 		var curPage = "/";
+		
 		function indexAjaxCall() {
 			curPage = "/"
 			var json_url = acf_rest_url + '/about/11';

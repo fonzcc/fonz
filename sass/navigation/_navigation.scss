@@ -34,6 +34,11 @@
 .main-nav {
     padding-top: 20px;
     position: relative;
+    #work, #about, #social {
+        &:hover {
+            color:blue !important;
+        }
+    }
     
    ul {
        font-family: $font__nav;
@@ -44,13 +49,13 @@
        justify-content: flex-end;
        padding-right: 120px;
 
-       &:hover {
+
            li {
-               color: $color__nav-hover;
+               color:$color__nav-links;
                transition: color .3s;
 
                &:hover {
-                   color: $color__nav-links;
+                   color: blue;
 
                    &::after {
                        background-color: $color__nav-links;
@@ -62,7 +67,6 @@
                    transition: background-color .3s;
                }
            }
-       }
 
        li {
            @include font-size(1);
@@ -96,16 +100,6 @@
             text-align: center;
             justify-content: stretch;
             transition: border .3s, color .3s;
-
-            &:hover {
-                li {
-                    color: $color__nav-links-mobile;
-
-                    &:hover {
-                        color: $color__nav-links-mobile
-                    }
-                }
-            }
 
             li {
                 color: $color__nav-links-mobile;

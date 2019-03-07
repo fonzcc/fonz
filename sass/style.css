@@ -9726,6 +9726,9 @@ big {
   padding-top: 20px;
   position: relative;
 }
+.main-nav #work:hover, .main-nav #about:hover, .main-nav #social:hover {
+  color: blue !important;
+}
 .main-nav ul {
   font-family: "MaisonNeueMono";
   -moz-osx-font-smoothing: grayscale;
@@ -9735,17 +9738,17 @@ big {
   justify-content: flex-end;
   padding-right: 120px;
 }
-.main-nav ul:hover li {
-  color: #0066ff;
+.main-nav ul li {
+  color: #c3c3c3;
   transition: color 0.3s;
 }
-.main-nav ul:hover li:hover {
-  color: #c3c3c3;
+.main-nav ul li:hover {
+  color: blue;
 }
-.main-nav ul:hover li:hover::after {
+.main-nav ul li:hover::after {
   background-color: #c3c3c3;
 }
-.main-nav ul:hover li::after {
+.main-nav ul li::after {
   background-color: #0066ff;
   transition: background-color 0.3s;
 }
@@ -9781,12 +9784,6 @@ big {
     text-align: center;
     justify-content: stretch;
     transition: border 0.3s, color 0.3s;
-  }
-  .main-nav ul:hover li {
-    color: #f5f6f6;
-  }
-  .main-nav ul:hover li:hover {
-    color: #f5f6f6;
   }
   .main-nav ul li {
     color: #f5f6f6;
@@ -10199,7 +10196,7 @@ big {
   display: none;
 }
 .project-collage-container .project-collage {
-  margin-bottom: 70vh;
+  margin-bottom: 35vh;
   cursor: pointer;
 }
 .project-collage-container .project-collage img {
