@@ -152,6 +152,7 @@
 		var curPage = "/";
 		
 		function indexAjaxCall() {
+
 			curPage = "/"
 			var json_url = acf_rest_url + '/about/11';
 
@@ -199,6 +200,7 @@
 		};
 
 		function socialAjaxCall() {
+			alert("social CALLED")
 			var json_url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=6392438538.92c538c.1937ea2d64ae4c91bd09b7e43213bfbe';
 			curPage = "/social"
 			if($social_link.hasClass('active')) {

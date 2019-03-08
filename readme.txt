@@ -42,7 +42,6 @@ Fonz includes support for Infinite Scroll in Jetpack.
 ----------------
 
 Double scroll bars in each project page
-Reverse nav link colors (blue state should be gray, gray states should be blue)
 When in a project, Work link in nav should close the project
 
 Sometimes when you are half way down a project page and you click next project, it needs to start at the top
@@ -59,3 +58,4 @@ completed:
 ------------------
 When Project is opened, transition image should not fade in, but should slide up with the rest of the bar, bottoms buttons can fade in after
 Add 100px padding between each project (maybe disable project after clears the view)
+Reverse nav link colors (blue state should be gray, gray states should be blue)
