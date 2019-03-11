@@ -33,9 +33,10 @@ function Get_Post_Number($postID){
                     $total_posts = $count_posts->publish;
                     $currentID = get_the_ID();
                     $post_number = Get_Post_Number($currentID);
+                    $slug = get_post_field( 'post_name', get_the_ID() );
                 ?>
 
-                    <div data-id="<?php echo get_the_ID() ?>" data-prev="<?php echo get_previous_post()->ID ?>" data-next="<?php echo get_next_post()->ID ?>" class="row project-collage">
+                    <div id="pic-<?php echo $slug; ?>" data-id="<?php echo get_the_ID() ?>" data-prev="<?php echo get_previous_post()->ID ?>" data-next="<?php echo get_next_post()->ID ?>" class="row project-collage">
                         <div class="col-12">
                              <?php echo wp_get_attachment_image( get_field('thumbnail'), 'full'); ?>
                              <div class="post-count-hidden">

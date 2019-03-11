@@ -1,5 +1,12 @@
 ( function($) {
 	$(document).ready(function() {
+
+		$work_link = $('#work');
+		$about_link = $('#about');
+		$index_link = $('#index');
+		$social_link = $('#social');
+		$nav_links = $('.main-nav ul li');
+
 		$site_main = $('body');
 		$nav_content_container = $('#nav-content-container');
 		$nav_content = $('.content-panel-container')
@@ -10,16 +17,14 @@
 		$mobile_nav_close_btn = $('#mobile-nav-close');
 		$loader = $('.loader-container');
 		
-
-		$work_link = $('#work');
-		$about_link = $('#about');
-		$index_link = $('#index');
-		$social_link = $('#social');
+		console.log("PATH: ", window.location.hash)
+		if(window.location.hash == "#about") {
+            aboutAjaxCall();
+        } else if(window.location.hash == "#social") {
+        	socialAjaxCall();
+        }
 
 		
-	
-
-		$nav_links = $('.main-nav ul li');
 		// resize $nav_content_container on load
 		resizeNavContentContainer(63);
 
@@ -51,12 +56,6 @@
 			}
 		});
 
-
-
-
-
-
-
 		// close nav content
 		$nav_close_btn.click(function() {
 			closeNavContent();
@@ -87,7 +86,7 @@
 
 
 		function workCall() {
-			//history.replaceState(null, null, "/work")
+			history.replaceState(null, null, "/#/work")
 			if($work_link.hasClass('active')) {
 				return;
 			} else {
@@ -102,8 +101,9 @@
 		// http://localhost:8888/wp-json/wp/v2/categories?parent=2
 
 		function aboutAjaxCall() {
-			curPage = "/about"
-			var json_url = acf_rest_url + '/about/11';
+			curPage = "/#/about"
+			var json_url = '/wp-json/acf/v3/about/11';
+			console.log("JSON_URL: ", json_url)
 
 			if($about_link.hasClass('active')) {
 				return;
@@ -152,7 +152,7 @@
 		var curPage = "/";
 		
 		function indexAjaxCall() {
-
+			//alert("INDEXNAJAX")
 			curPage = "/"
 			var json_url = acf_rest_url + '/about/11';
 
@@ -200,9 +200,9 @@
 		};
 
 		function socialAjaxCall() {
-			alert("social CALLED")
+
 			var json_url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=6392438538.92c538c.1937ea2d64ae4c91bd09b7e43213bfbe';
-			curPage = "/social"
+			curPage = "/#/social"
 			if($social_link.hasClass('active')) {
 				return;
 			} else {
@@ -256,7 +256,7 @@
 		};
 
 		function rebindNavClicks() {
-			//history.replaceState(null, null, curPage)
+			history.replaceState(null, null, curPage)
 			$work_link.click(function() {
 				workCall();
 			});
@@ -284,6 +284,7 @@
 
 
 		function resizeNavContentContainer(headerSize) {
+			//console.log("Resize Nav Container")
 			$window_height = $(window).outerHeight() - headerSize;
 			$nav_content_container.css('height', $window_height);
 		};
@@ -294,6 +295,7 @@
 
 
 		function openNavContent(link) {
+			console.log("openNavContent")
 			setActiveNavLink(link);
 			$('#nav-content-container').slideDown(400, function() {
 				$nav_close_btn.fadeIn(1000);
@@ -305,6 +307,7 @@
 		};
 
 		function revealNavContent(content) {
+			console.log("revealNavContent")
 			$nav_content_container.promise().done(function() {
 				$nav_content.promise().done(function() {
 					$content_panel.html(content).promise().done(function() {
@@ -318,7 +321,7 @@
 		}
 
 		function closeNavContent() {
-			//history.replaceState(null, null, "/work")
+			history.replaceState(null, null, "/")
 			setActiveNavLink($('.main-nav ul li:contains("Work")'));
 			$nav_content.fadeOut(500);
 			$nav_close_btn.fadeOut(500);

@@ -130,7 +130,7 @@ function fonz_scripts() {
 
 	wp_enqueue_script( 'fonz-navigation', get_template_directory_uri() . '/js/navigation.js', array('jquery'), '0.1', true );
 
-	wp_enqueue_script( 'fonz-page-nav', get_template_directory_uri() . '/js/page-nav.js', array('jquery'), '0.1', true );
+	wp_enqueue_script( 'fonz-page-nav', get_template_directory_uri() . '/js/page-nav-1.js', array('jquery'), '0.1', true );
 
 	wp_enqueue_script( 'fonz-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 

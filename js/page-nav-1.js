@@ -1,5 +1,8 @@
 ( function($) {
     $(document).ready(function() {
+
+        var slugId;
+       
         $project_description_preview = $('.project-info-container .description');
         $project_title_preview = $('.project-info-container .meta-header .title');
         $project_post_count_preview = $('.project-info-container .meta-header .post-count');
@@ -24,6 +27,21 @@
 
         $next = $('#project-next');
         $prev = $('#project-back');
+
+        if(window.location.hash.includes("#/projects")) {
+            slugId = window.location.hash.replace("#/projects/", "")
+            console.log("IDDDD0: ", slugId)
+
+            console.log("poop")
+            var aTag = $("#pic-" + slugId);
+            console.log("aTag: ", aTag)
+            console.log(" aTag.offset().top: ",  aTag.offset().top)
+            setTimeout(function() {
+                $('html,body').scrollTop(aTag.offset().top);
+                expandProject()
+            }, 800)
+
+        } 
 
 
         $next.on('click', function() {
@@ -195,6 +213,7 @@
         // ====================================================
         function expandProject() {
 
+
             $project_info_container.addClass('expanded');
             // disable click event
             $project_info_container.off('click');
@@ -348,21 +367,30 @@
         });
 
         function projectAjaxCall() {
-            var json_url = page_nav_object.rest_url + '/' + $project_info_container.attr('data-id');
+            var json_url = slugId ? "/wp-json/wp/v2/posts?slug=" + slugId : "/wp-json/wp/v2/posts?slug=" + $project_info_container.attr('data-id')
+            console.log()
+            //var json_url = "/wp-json/wp/v2/posts/" + $project_info_container.attr('data-id');
+
+            //http://localhost:8888/wp-json/wp/v2/posts/139
+            //var json_url = page_nav_object.rest_url + 'wp-json/wp/v2/' + $project_info_container.attr('data-id');
+
+            //console.log("json_url: ", altJsonUrl)
             $content = $('#project-ajax-content');
 
-            $.ajax({
-                url: json_url,
-                dataType: 'json',
-                beforeSend: function() {
-                },
-                error: function() {
-                    console.log('projectAjaxCall error');
-                },
-                success: function(data) {
-                    $content.html(data.acf.content);
-                }
-            }); 
+            // $.ajax({
+            //     url: json_url,
+            //     dataType: 'json',
+            //     beforeSend: function() {
+            //     },
+            //     error: function() {
+            //         console.log('projectAjaxCall error');
+            //     },
+            //     success: function(data) {
+            //         console.log("DATA: ", data)
+            //         $content.html(data.acf.content);
+                    
+            //     }
+            // }); 
         }
 
         function scrollTop() {
