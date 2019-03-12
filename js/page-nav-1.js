@@ -3,6 +3,7 @@
 
         var slugId;
        
+        $site_main = $('body');
         $project_description_preview = $('.project-info-container .description');
         $project_title_preview = $('.project-info-container .meta-header .title');
         $project_post_count_preview = $('.project-info-container .meta-header .post-count');
@@ -30,7 +31,6 @@
 
         if(window.location.hash.includes("#/projects")) {
             slugId = window.location.hash.replace("#/projects/", "")
-            console.log("IDDDD0: ", slugId)
 
             console.log("poop")
             var aTag = $("#pic-" + slugId);
@@ -39,6 +39,7 @@
             setTimeout(function() {
                 $('html,body').scrollTop(aTag.offset().top);
                 expandProject()
+                // try this
             }, 800)
 
         } 
@@ -53,6 +54,13 @@
             } else {
                 var json_url = page_nav_object.rest_url + '/' + $(this).attr('data-next');
                 $post_id = $(this).attr('data-next');
+                console.log("POST ID: ", $post_id)
+
+                postSlug = $(this).attr('data-next-slug')
+                console.log("POST SLUG: ", postSlug);
+                curPage = "#/projects/" + postSlug
+                history.replaceState(null, null, curPage)
+
 
                 $.ajax({
                     url: json_url,
@@ -79,6 +87,12 @@
             } else {
                 var json_url = page_nav_object.rest_url + '/' + $(this).attr('data-prev');
                 $post_id = $(this).attr('data-prev');
+                console.log("POST ID: ", $post_id)
+
+                postSlug = $(this).attr('data-prev-slug')
+                console.log("POST SLUG: ", postSlug);
+                curPage = "#/projects/" + postSlug
+                history.replaceState(null, null, curPage)
 
                 $.ajax({
                     url: json_url,
@@ -109,6 +123,8 @@
             $project_info_container.attr('data-id', $post_id);
             $post_next_id = $("div[data-id='" + $post_id + "']").attr('data-next');
             $post_prev_id = $("div[data-id='" + $post_id + "']").attr('data-prev');
+            $post_next_slug = $("div[data-id='" + $post_id + "']").attr('data-next-slug');
+            $post_prev_slug = $("div[data-id='" + $post_id + "']").attr('data-prev-slug');
 
             $post_count.html($post_count_value);
             $post_title.html(data.title.rendered);
@@ -119,17 +135,23 @@
 
             $next.attr('data-next', $post_next_id);
             $prev.attr('data-prev', $post_prev_id);
+            $next.attr('data-next-slug', $post_next_slug);
+            $prev.attr('data-prev-slug', $post_prev_slug);
 
             $project_info.fadeIn();
         }
 
 
-        $project_info_container.on('click', function() {
+        $project_info_container.on('click', function(e) {
+
+            curPage = "/#/projects/" + $project_info_container.attr('data-slug');
+            history.replaceState(null, null, curPage);
             expandProject();
             projectAjaxCall();
         });
 
-        $project_thumbnail.on('click', function() {
+        $project_thumbnail.on('click', function(e) {
+            console.log("EVENT: ", e)
             expandProject();
             projectAjaxCall();
         });
@@ -168,33 +190,48 @@
                 $thumbnail_offset_top = $(this).offset().top;
                 $thumbnail_height =  $(this).outerHeight(true);
                 $thumbnail_offset_total = $thumbnail_offset_top + $thumbnail_height;
+
+                var isInView = $project_info_container.offset().top >= $thumbnail_offset_top;
+                var isInOffset = $project_info_container.offset().top < $thumbnail_offset_total;
+                console.log("isInView: ", isInView)
+                console.log("$project_info_container.offset().top: ", $project_info_container.offset().top)
+                console.log("$thumbnail_offset_top: ", $thumbnail_offset_top)
+
                 // update meta content when thumbnail is scrolled into view
-                if ( $project_info_container.offset().top >= $thumbnail_offset_top & $project_info_container.offset().top < $thumbnail_offset_total ) {
+                if ( isInView & isInOffset ) {
+                    console.log("GOT IT")
                     $post_count = $(this).find('.post-count-hidden').html();
                     $title = $(this).find('.title-hidden').html();
                     $description = $(this).find('.description-hidden').html();
                     $transition_image = $(this).find('.transition-image-hidden').html();
                     $type = $(this).find('.type-hidden').html();
                     $project_id = $(this).attr('data-id');
+                    $project_slug = $(this).attr('data-slug');
                     $prev_id = $(this).attr('data-prev');
                     $next_id = $(this).attr('data-next');
+                    $prev_slug = $(this).attr('data-prev-slug');
+                    $next_slug = $(this).attr('data-next-slug');
 
 
                     if ( $project_info_container.attr('data-id') === $project_id) {
                         return;
                     } else {
-                        metaPreviewUpdate($post_count, $title, $description, $transition_image, $type, $project_id, $prev_id, $next_id);
+                        console.log("project slug: ", $project_slug)
+                        metaPreviewUpdate($post_count, $title, $description, $transition_image, $type, $project_id, $project_slug, $prev_id, $next_id, $prev_slug, $next_slug);
                         console.log('fired');
                     }
                 }
             });
         };
 
-        function metaPreviewUpdate(post_count, title, description, transition_image, type, project_id, prev_id, next_id) {
+        function metaPreviewUpdate(post_count, title, description, transition_image, type, project_id, project_slug, prev_id, next_id, prev_slug, next_slug) {
             $meta_container.addClass('fadeOut');
             $project_info_container.attr('data-id', project_id);
+             $project_info_container.attr('data-slug', project_slug);
             $next.attr('data-next', next_id);
             $prev.attr('data-prev', prev_id);
+            $next.attr('data-next-slug', next_slug);
+            $prev.attr('data-prev-slug', prev_slug);
 
             $meta_container.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
                 function () {
@@ -258,6 +295,7 @@
             });
 
             $project_nav.css('overflow-y', 'hidden');
+            history.replaceState(null, null, "/")
 
             // if mobile, project nav bar fully collapses
             if ($(window).width() < 992) {
@@ -297,11 +335,17 @@
             setTimeout(function () {
                 // rebind click event on project info container to expand project
                 // delay so click on logo does not also register click rebind
-                $project_info_container.on('click', function () {
+                $project_info_container.on('click', function (e) {
+                    console.log("E: ", e)
                     expandProject();
                 });
             }, 100);
         }
+        $("#social").click(function() {
+            if($(".project-info-container").hasClass("expanded")) {
+                closeProject();
+            }
+        })
 
         // ====================================================
         // Lock Body Scroll for iOS
@@ -367,8 +411,8 @@
         });
 
         function projectAjaxCall() {
-            var json_url = slugId ? "/wp-json/wp/v2/posts?slug=" + slugId : "/wp-json/wp/v2/posts?slug=" + $project_info_container.attr('data-id')
-            console.log()
+            var json_url = slugId ? "/wp-json/wp/v2/posts?slug=" + slugId : "/wp-json/wp/v2/posts?slug=" + $project_info_container.attr('data-slug')
+
             //var json_url = "/wp-json/wp/v2/posts/" + $project_info_container.attr('data-id');
 
             //http://localhost:8888/wp-json/wp/v2/posts/139
@@ -376,6 +420,8 @@
 
             //console.log("json_url: ", altJsonUrl)
             $content = $('#project-ajax-content');
+            curPage = "#/projects/" + $project_info_container.attr('data-slug')
+            history.replaceState(null, null, curPage)
 
             // $.ajax({
             //     url: json_url,

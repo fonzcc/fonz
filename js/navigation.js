@@ -216,7 +216,7 @@
 						// slide down or fade out content based on state of nav panel and set active link
 						ajaxBeforeSendNavContent($social_link);
 					},
-					error: function() {
+					error: function() {			
 						console.log('ajaxError');
 						$loader.fadeOut(200);
 					},

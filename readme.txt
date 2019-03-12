@@ -42,7 +42,7 @@ Fonz includes support for Infinite Scroll in Jetpack.
 ----------------
 
 Double scroll bars in each project page
-When in a project, Work link in nav should close the project
+
 
 Sometimes when you are half way down a project page and you click next project, it needs to start at the top
 Get a video to be added to the bottom of projects
@@ -51,11 +51,13 @@ previous and next buttons backwards?
 
 in progress:
 -----------------
-Each project needs a direct link
-
+Back and Previous buttons
 
 completed: 
 ------------------
 When Project is opened, transition image should not fade in, but should slide up with the rest of the bar, bottoms buttons can fade in after
 Add 100px padding between each project (maybe disable project after clears the view)
 Reverse nav link colors (blue state should be gray, gray states should be blue)
+When in a project, Work link in nav should close the project
+Each project needs a direct link
+
